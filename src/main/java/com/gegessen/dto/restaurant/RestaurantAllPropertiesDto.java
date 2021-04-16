@@ -21,6 +21,8 @@ public class RestaurantAllPropertiesDto {
 
     private String description;
 
+    private String picUrl;
+
     @NotBlank(message = "phone number cannot be empty or null") //TODO add regex
     private String phoneNumber;
 
@@ -155,6 +157,14 @@ public class RestaurantAllPropertiesDto {
 
     public void setClosingDayOfTheWeek(DayOfTheWeek closingDayOfTheWeek) {
         this.closingDayOfTheWeek = closingDayOfTheWeek;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public String getShortDescription() {

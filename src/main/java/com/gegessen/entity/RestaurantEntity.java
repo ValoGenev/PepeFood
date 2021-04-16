@@ -28,6 +28,9 @@ public class RestaurantEntity {
     @Column(name = "description",columnDefinition="text", length=50000)
     private String description;
 
+    @Column(name = "pic_url")
+    private String picUrl;
+
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
@@ -198,5 +201,13 @@ public class RestaurantEntity {
 
     public void setClosingDayOfTheWeek(DayOfTheWeek closingDayOfTheWeek) {
         this.closingDayOfTheWeek = closingDayOfTheWeek;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }

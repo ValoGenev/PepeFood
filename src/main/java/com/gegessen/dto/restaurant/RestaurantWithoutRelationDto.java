@@ -14,6 +14,8 @@ public class RestaurantWithoutRelationDto {
 
     private String phoneNumber;
 
+    private String picUrl;
+
     private String city;
 
     private String neighborhood;
@@ -149,6 +151,14 @@ public class RestaurantWithoutRelationDto {
 
     public void setOpeningDayOfTheWeek(DayOfTheWeek openingDayOfTheWeek) {
         this.openingDayOfTheWeek = openingDayOfTheWeek;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public DayOfTheWeek getClosingDayOfTheWeek() {
