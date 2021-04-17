@@ -139,6 +139,7 @@ public class ProductService implements IProductService {
         return modelMapper.map(createProduct(productToBeUpdated),ProductAllPropertiesDto.class);
     }
 
+
     @Override
     public Set<OrderWithoutRelationDto> getProductOrders(String id) {
 
@@ -148,6 +149,7 @@ public class ProductService implements IProductService {
                 .map(o->modelMapper.map(o,OrderWithoutRelationDto.class))
                 .collect(Collectors.toSet());
     }
+
 
     @Override
     public List<FoodCategoryWithCountDto> getCategoriesWithCount() {
@@ -179,6 +181,7 @@ public class ProductService implements IProductService {
 
         return availableCategories;
     }
+
 
     private ProductEntity createProduct(ProductEntity product) {
         try {

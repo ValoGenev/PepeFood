@@ -1,7 +1,9 @@
 package com.gegessen.controller;
 
 import com.gegessen.dto.restaurant.RestaurantAllPropertiesDto;
+import com.gegessen.dto.restaurant.RestaurantTestDto;
 import com.gegessen.dto.restaurant.RestaurantWithoutRelationDto;
+import com.gegessen.model.ProductCategory;
 import com.gegessen.service.restaurant.IRestaurantService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 import static com.gegessen.util.Constants.*;
@@ -33,7 +36,7 @@ public class RestaurantController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<RestaurantWithoutRelationDto>> getAll() {
+    public ResponseEntity<List<RestaurantTestDto>> getAll() {
         LOGGER.info(GET_ALL_RESTAURANTS_MESSAGE);
         return ok(restaurantService.findAll());
     }
@@ -62,6 +65,15 @@ public class RestaurantController {
         LOGGER.info(format(UPDATE_RESTAURANT_BY_ID_MESSAGE, id));
         return ok(restaurantService.update(restaurant, id));
     }
+
+
+    @GetMapping(produces = APPLICATION_JSON_VALUE,params = "category")
+    public ResponseEntity<List<RestaurantTestDto>> getAllByCategories(@RequestParam("category") ProductCategory category) {
+        LOGGER.info(format("FIDING RESTAURANT WITH SPECIFIC CATEGORY %s", category.name()));
+        return ok(restaurantService.findAllByCategory(category));
+    }
+
+
 
 
 }

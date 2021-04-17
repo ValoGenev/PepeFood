@@ -31,7 +31,7 @@ public class CustomMailSender {
         mailContent+="<p>You can sign in to PepeFood by clicking the button below. Happy eating!";
 
 
-        mailContent+="<h3><a href=\"" + "https://www.pepefood-bg.com/email/verify?token="+user.getEmailVerificationToken() + "\">VERIFY</a></h3>";
+        mailContent+="<h3><a href=\"" + "pepefoodbg@gmail.com"+user.getEmailVerificationToken() + "\">VERIFY</a></h3>";
 
 
         mailContent+="<p>Thank you<br>The PepeFood Team</p>";
@@ -41,7 +41,7 @@ public class CustomMailSender {
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
         try {
-            helper.setFrom("trip.with.me.bg@gmail.com",senderName);
+            helper.setFrom("pepefoodbg@gmail.com",senderName);
             helper.setTo(user.getEmail());
             helper.setSubject(subject);
             helper.setText(mailContent,true);

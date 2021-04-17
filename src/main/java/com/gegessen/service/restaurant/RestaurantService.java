@@ -1,6 +1,7 @@
 package com.gegessen.service.restaurant;
 
 import com.gegessen.dto.category.FoodCategoryWithCountDto;
+import com.gegessen.dto.restaurant.RestaurantTestDto;
 import com.gegessen.dto.user.UserAllPropertiesDto;
 import com.gegessen.dto.restaurant.RestaurantAllPropertiesDto;
 import com.gegessen.dto.restaurant.RestaurantWithoutRelationDto;
@@ -10,6 +11,7 @@ import com.gegessen.exception.AlreadyExistingResourceException;
 import com.gegessen.exception.ConflictException;
 import com.gegessen.exception.RestaurantNotFoundException;
 import com.gegessen.exception.handlers.AlreadyOwningRestaurantException;
+import com.gegessen.model.ProductCategory;
 import com.gegessen.repository.IRestaurantRepository;
 import com.gegessen.service.user.IUserService;
 
@@ -21,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,15 +50,38 @@ public class RestaurantService implements IRestaurantService {
     }
 
     @Override
-    public Set<RestaurantWithoutRelationDto> findAll() {
+    public List<RestaurantTestDto> findAll() {
         LOGGER.info(GET_ALL_RESTAURANTS_MESSAGE);
 
         try {
-            return restaurantRepository
-                    .findAll()
-                    .stream()
-                    .map(restaurant -> modelMapper.map(restaurant, RestaurantWithoutRelationDto.class))
-                    .collect(Collectors.toSet());
+//            return restaurantRepository
+//                    .findAll()
+//                    .stream()
+//                    .map(restaurant -> modelMapper.map(restaurant, RestaurantWithoutRelationDto.class))
+//                    .collect(Collectors.toSet());
+            List<RestaurantEntity> restaurants = restaurantRepository.findAll();
+            List<RestaurantTestDto> dtos = new ArrayList<>();
+
+            restaurants.forEach(s->{
+                Set<ProductCategory> productCategories = new HashSet<>();
+
+                s.getProducts().forEach(p->{
+                    if(p.getQuantity() > 0){
+                        productCategories.add(p.getCategory());
+                    }
+                });
+
+                RestaurantTestDto restaurantTestDto =modelMapper.map(s,RestaurantTestDto.class);
+                restaurantTestDto.setProductCategories(productCategories);
+                dtos.add(restaurantTestDto);
+            });
+
+
+            return dtos;
+
+
+
+
         } catch (DataAccessException e) {
             LOGGER.error(DATABASE_ERROR_MESSAGE);
             throw new ServiceException(DATABASE_ERROR_MESSAGE);
@@ -124,6 +151,37 @@ public class RestaurantService implements IRestaurantService {
         return modelMapper.map(createRestaurant(restaurantToBeUpdated), RestaurantAllPropertiesDto.class);
     }
 
+    @Override
+    public List<RestaurantTestDto> findAllByCategory(ProductCategory category) {
+        List<RestaurantEntity> restaurants;
+
+        if(category==null){
+            restaurants = restaurantRepository.findAll();
+        }else {
+            restaurants = restaurantRepository.findAllByCategory(category);
+        }
+
+
+        List<RestaurantTestDto> dtos = new ArrayList<>();
+
+        restaurants.forEach(s->{
+            Set<ProductCategory> productCategories = new HashSet<>();
+
+            s.getProducts().forEach(p->{
+                if(p.getQuantity() > 0){
+                    productCategories.add(p.getCategory());
+                }
+            });
+
+            RestaurantTestDto restaurantTestDto =modelMapper.map(s,RestaurantTestDto.class);
+            restaurantTestDto.setProductCategories(productCategories);
+            dtos.add(restaurantTestDto);
+        });
+
+
+       return dtos;
+
+    }
 
     private RestaurantEntity createRestaurant(RestaurantEntity restaurant) {
         try {

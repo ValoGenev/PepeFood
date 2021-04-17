@@ -71,6 +71,7 @@ com\gegessen\model\UserPermission.class
 com\gegessen\security\filters\SocialAuthenticationFilter$1.class
 com\gegessen\security\userdetails\GoogleUserDetailsServiceImpl.class
 com\gegessen\service\order\IOrderService.class
+com\gegessen\dto\restaurant\RestaurantTestDto.class
 com\gegessen\service\email\MailService.class
 com\gegessen\dto\GoogleUserDto.class
 com\gegessen\exception\handlers\OrderExceptionHandler.class

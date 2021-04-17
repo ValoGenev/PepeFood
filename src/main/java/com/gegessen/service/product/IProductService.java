@@ -29,4 +29,5 @@ public interface IProductService {
     Set<OrderWithoutRelationDto> getProductOrders(String id);
 
     List<FoodCategoryWithCountDto> getCategoriesWithCount();
+
 }
