@@ -63,11 +63,11 @@ public class RestaurantService implements IRestaurantService {
             List<RestaurantTestDto> dtos = new ArrayList<>();
 
             restaurants.forEach(s->{
-                Set<ProductCategory> productCategories = new HashSet<>();
+                Set<String> productCategories = new HashSet<>();
 
                 s.getProducts().forEach(p->{
                     if(p.getQuantity() > 0){
-                        productCategories.add(p.getCategory());
+                        productCategories.add(p.getCategory().getName());
                     }
                 });
 
@@ -165,11 +165,11 @@ public class RestaurantService implements IRestaurantService {
         List<RestaurantTestDto> dtos = new ArrayList<>();
 
         restaurants.forEach(s->{
-            Set<ProductCategory> productCategories = new HashSet<>();
+            Set<String> productCategories = new HashSet<>();
 
             s.getProducts().forEach(p->{
                 if(p.getQuantity() > 0){
-                    productCategories.add(p.getCategory());
+                    productCategories.add(p.getCategory().getName());
                 }
             });
 

@@ -71,17 +71,17 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
         String method = request.getMethod();
 
-        if(method.equals("DELETE") && request.getServletPath().matches("/config/api/v1/users.*") ||
-           method.equals("PUT") && request.getServletPath().matches("/config/api/v1/users.*") ||
-           method.equals("POST") && request.getServletPath().matches("/config/api/v1/users") ||
-           method.equals("POST") && request.getServletPath().matches("/config/api/v1/restaurants") ||
-           method.equals("DELETE") && request.getServletPath().matches("/config/api/v1/restaurants.*") ||
-           method.equals("PUT") && request.getServletPath().matches("/config/api/v1/restaurants.*") ||
-           method.equals("POST") && request.getServletPath().matches("/config/api/v1/products") ||
-           method.equals("DELETE") && request.getServletPath().matches("/config/api/v1/products.*") ||
-           method.equals("PUT") && request.getServletPath().matches("/config/api/v1/products.*")){
-            return false;
-        }
+//        if(method.equals("DELETE") && request.getServletPath().matches("/config/api/v1/users.*") ||
+//           method.equals("PUT") && request.getServletPath().matches("/config/api/v1/users.*") ||
+//           method.equals("POST") && request.getServletPath().matches("/config/api/v1/users") ||
+//           method.equals("POST") && request.getServletPath().matches("/config/api/v1/restaurants") ||
+//           method.equals("DELETE") && request.getServletPath().matches("/config/api/v1/restaurants.*") ||
+//           method.equals("PUT") && request.getServletPath().matches("/config/api/v1/restaurants.*") ||
+//           method.equals("POST") && request.getServletPath().matches("/config/api/v1/products") ||
+//           method.equals("DELETE") && request.getServletPath().matches("/config/api/v1/products.*") ||
+//           method.equals("PUT") && request.getServletPath().matches("/config/api/v1/products.*")){
+//            return false;
+//        }
 
 
 

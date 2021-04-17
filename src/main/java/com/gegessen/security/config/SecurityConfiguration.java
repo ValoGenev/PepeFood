@@ -105,27 +105,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/config/api/v1/users/login", "/config/api/v1/users/logout").permitAll()
 
-                //users
-                .antMatchers(HttpMethod.DELETE,"/config/api/v1/users/**").hasAnyRole(ADMIN.name())
-                .antMatchers(HttpMethod.POST,"/config/api/v1/users").hasRole(ADMIN.name())
-                .antMatchers(HttpMethod.PUT,"/config/api/v1/users/**").hasAnyRole(ADMIN.name(),USER.name())
-
-
-                //restaurants
-                .antMatchers(HttpMethod.DELETE,"/config/api/v1/restaurants/**").hasAnyRole(ADMIN.name())
-                .antMatchers(HttpMethod.POST,"/config/api/v1/restaurants").hasAnyRole(ADMIN.name(),USER.name())
-                .antMatchers(HttpMethod.PUT,"/config/api/v1/restaurants/**").hasAnyRole(ADMIN.name(),USER.name())
-
-
-                //products
-                .antMatchers(HttpMethod.DELETE,"/config/api/v1/products/**").hasAnyRole(ADMIN.name(),USER.name())
-                .antMatchers(HttpMethod.POST,"/config/api/v1/products").hasAnyRole(ADMIN.name(),USER.name())
-                .antMatchers(HttpMethod.PUT,"/config/api/v1/products/**").hasAnyRole(ADMIN.name(),USER.name())
-
-                //orders
-                .antMatchers(HttpMethod.DELETE,"/config/api/v1/orders/**").hasAnyRole(ADMIN.name())
-                .antMatchers(HttpMethod.POST,"/config/api/v1/orders").hasAnyRole(ADMIN.name(),USER.name())
-                .antMatchers(HttpMethod.PUT,"/config/api/v1/orders/**").hasAnyRole(ADMIN.name(),USER.name())
+//                //users
+//                .antMatchers(HttpMethod.DELETE,"/config/api/v1/users/**").hasAnyRole(ADMIN.name())
+//                .antMatchers(HttpMethod.POST,"/config/api/v1/users").hasRole(ADMIN.name())
+//                .antMatchers(HttpMethod.PUT,"/config/api/v1/users/**").hasAnyRole(ADMIN.name(),USER.name())
+//
+//
+//                //restaurants
+//                .antMatchers(HttpMethod.DELETE,"/config/api/v1/restaurants/**").hasAnyRole(ADMIN.name())
+//                .antMatchers(HttpMethod.POST,"/config/api/v1/restaurants").hasAnyRole(ADMIN.name(),USER.name())
+//                .antMatchers(HttpMethod.PUT,"/config/api/v1/restaurants/**").hasAnyRole(ADMIN.name(),USER.name())
+//
+//
+//                //products
+//                .antMatchers(HttpMethod.DELETE,"/config/api/v1/products/**").hasAnyRole(ADMIN.name(),USER.name())
+//                .antMatchers(HttpMethod.POST,"/config/api/v1/products").hasAnyRole(ADMIN.name(),USER.name())
+//                .antMatchers(HttpMethod.PUT,"/config/api/v1/products/**").hasAnyRole(ADMIN.name(),USER.name())
+//
+//                //orders
+//                .antMatchers(HttpMethod.DELETE,"/config/api/v1/orders/**").hasAnyRole(ADMIN.name())
+//                .antMatchers(HttpMethod.POST,"/config/api/v1/orders").hasAnyRole(ADMIN.name(),USER.name())
+//                .antMatchers(HttpMethod.PUT,"/config/api/v1/orders/**").hasAnyRole(ADMIN.name(),USER.name())
 
 
                 .antMatchers("**").permitAll()

@@ -38,7 +38,7 @@ public class RestaurantTestDto {
 
     private String shortDescription;
 
-    private Set<ProductCategory> productCategories;
+    private Set<String> productCategories;
 
     public RestaurantTestDto() {
     }
@@ -163,11 +163,11 @@ public class RestaurantTestDto {
         this.shortDescription = shortDescription;
     }
 
-    public Set<ProductCategory> getProductCategories() {
+    public Set<String> getProductCategories() {
         return productCategories;
     }
 
-    public void setProductCategories(Set<ProductCategory> productCategories) {
+    public void setProductCategories(Set<String> productCategories) {
         this.productCategories = productCategories;
     }
 }
