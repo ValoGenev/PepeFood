@@ -52,7 +52,7 @@ public class MainController {
         Configuration config= Utils.getSystemConfig(GegessenApplication.class);
         imageKit.setConfig(config);
 
-        Map<String,String> authenticationParams = imageKit.getAuthenticationParameters(null, Calendar.getInstance().getTimeInMillis() + 7200000L);
+        Map<String,String> authenticationParams = imageKit.getAuthenticationParameters(null, Calendar.getInstance().getTimeInMillis() + 300000L);
 
         return ResponseEntity.ok(authenticationParams);
     }
