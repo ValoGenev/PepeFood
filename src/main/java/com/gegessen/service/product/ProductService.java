@@ -160,14 +160,15 @@ public class ProductService implements IProductService {
 
         List<ProductEntity> products = productRepository.getAvailableProducts();
 
+
         Arrays.stream(ProductCategory.values()).forEach(c->{
             FoodCategoryWithCountDto obj = new FoodCategoryWithCountDto(c.getName(),c.getUrl(),0);
-
 
             int count = products.stream()
                     .filter(p->p.getCategory().name().equals(obj.getCategory()))
                     .mapToInt(ProductEntity::getQuantity)
                     .sum();
+
 
             System.out.println(obj.getCategory() + " " + count);
 
