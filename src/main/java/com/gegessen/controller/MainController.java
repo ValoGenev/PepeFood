@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,7 +52,7 @@ public class MainController {
         Configuration config= Utils.getSystemConfig(GegessenApplication.class);
         imageKit.setConfig(config);
 
-        Map<String,String> authenticationParams = imageKit.getAuthenticationParameters(null,7200000L);
+        Map<String,String> authenticationParams = imageKit.getAuthenticationParameters(null, Calendar.getInstance().getTimeInMillis() + 7200000L);
 
         return ResponseEntity.ok(authenticationParams);
     }
