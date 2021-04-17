@@ -45,11 +45,13 @@ public class MainController {
 
     @GetMapping(value = "/imagekit/auth",produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,String>> authImageKit() throws IOException {
+        LOGGER.info("GEI IMAGEKIT");
+
         ImageKit imageKit=ImageKit.getInstance();
         Configuration config= Utils.getSystemConfig(GegessenApplication.class);
         imageKit.setConfig(config);
 
-        Map<String,String> authenticationParams = imageKit.getAuthenticationParameters();
+        Map<String,String> authenticationParams = imageKit.getAuthenticationParameters(null,7200000L);
 
         return ResponseEntity.ok(authenticationParams);
     }
