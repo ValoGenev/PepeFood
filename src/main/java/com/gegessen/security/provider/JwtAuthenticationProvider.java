@@ -35,7 +35,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
             return new JwtAuthentication(loggedInUser.getUsername(),null,loggedInUser.getAuthorities());
         }
 
-        throw  new BadCredentialsException("BAD CREDENTIALS");
+        throw new BadCredentialsException("BAD CREDENTIALS");
     }
 
     @Override

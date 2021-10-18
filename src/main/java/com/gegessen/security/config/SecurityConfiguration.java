@@ -1,10 +1,7 @@
 package com.gegessen.security.config;
 
 import com.gegessen.repository.IUserRepository;
-import com.gegessen.security.filters.CustomLogoutFilter;
-import com.gegessen.security.filters.JwtTokenAuthenticationFilter;
-import com.gegessen.security.filters.SocialAuthenticationFilter;
-import com.gegessen.security.filters.UnauthorizedExceptionFilter;
+import com.gegessen.security.filters.*;
 import com.gegessen.security.jwt.JwtTokenUtil;
 import com.gegessen.security.provider.EmailAuthenticationProvider;
 import com.gegessen.security.provider.FacebookAuthenticationProvider;
@@ -76,6 +73,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new JwtAuthenticationProvider(jwtUserDetailsService,jwtTokenUtil());
     }
 
+    @Bean
+    public OAuthCustomFilter oAuthCustomFilter() throws Exception {
+        return new OAuthCustomFilter(authenticationManager());
+    }
 
     @Bean
     public SocialAuthenticationFilter authenticationFilter() throws Exception {
@@ -103,7 +104,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
-                .antMatchers("/config/api/v1/users/login", "/config/api/v1/users/logout").permitAll()
+                .antMatchers("/config/api/v1/login/github", "/config/api/v1/users/logout").permitAll()
 
 //                //users
 //                .antMatchers(HttpMethod.DELETE,"/config/api/v1/users/**").hasAnyRole(ADMIN.name())
@@ -137,8 +138,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterAt(authenticationFilter(), BasicAuthenticationFilter.class);
-        http.addFilterBefore(jwtTokenAuthenticationFilter(), SocialAuthenticationFilter.class);
+        http.addFilterAt(oAuthCustomFilter(), BasicAuthenticationFilter.class);
+        http.addFilterBefore(jwtTokenAuthenticationFilter(), OAuthCustomFilter.class);
         http.addFilterBefore(unauthorizedExceptionFilter(), LogoutFilter.class);
         http.addFilterAt(customLogoutFilter(),LogoutFilter.class);
 
